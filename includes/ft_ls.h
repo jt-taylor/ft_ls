@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 11:48:14 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/05 12:49:42 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/05 19:39:33 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define FLAG_G 0x40
 # define FLAG_D 0x80
 
-# define MALLOC_ERROR 1;
+# define FT_LS_MALLOC_ERROR 1;
 
 typedef struct				s_ft_ls_info
 {
@@ -43,7 +43,7 @@ typedef struct				s_ft_ls_info
 	char				mode[12];
 	char				data[25];
 	nlink_t				nlinks;
-	dev_t				dev;
+	dev_t				rdev;
 	off_t				size;
 	uid_t				uid;
 	gid_t				gid;
@@ -59,8 +59,8 @@ typedef struct				s_ft_ls_dir
 	char				*name;
 	char				close : 1;
 	size_t				total;
-	t_info				*head;
-	t_info				*last_file;
+	t_ft_ls_info		*head;
+	t_ft_ls_info		*last_file;
 	size_t				s_name;
 	size_t				s_group;
 	size_t				s_size;
@@ -84,5 +84,8 @@ typedef struct				s_ft_ls
 ** Prototypes
 */
 
+void						ft_ls_read_info(t_ft_ls *ls, char *argv);
+void						ft_ls_error_msg(const char flag);
+t_ft_ls_info				*ft_ls_new_file_elem(t_ft_ls_dir *dir);
 
 #endif

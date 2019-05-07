@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/05 14:11:17 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/05 19:05:59 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ int				main(int ac, char **argv)
 
 	i = 0;
 	if ((ls = (t_ft_ls *)malloc(sizeof(t_ft_ls))) == NULL)
-		return (MALLOC_ERROR);
+		return (FT_LS_MALLOC_ERROR);
 	ft_bzero(ls, sizeof(t_ft_ls));
 	if ((ls->files = (t_ft_ls_dir *)malloc(sizeof(t_ft_ls_dir))) == NULL)
-		return (MALLOC_ERROR);
+		return (FT_LS_MALLOC_ERROR);
 	ft_bzero(ls->files, sizeof(t_ft_ls_dir));
 	if (ac > 1 && argv[1][0] == '-' && argv[1][1])
 		check_flags(ls, argv, &i);
