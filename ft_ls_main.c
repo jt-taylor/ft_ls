@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/05 19:05:59 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 00:13:10 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 				ls->flag |= FLAG_L;
 			else if (*argv[*i] == 'a')
 				ls->flag |= FLAG_A;
-			else if (*argv[*i] == 'R')
+			else if (*argv[*i] == 'r')
 				ls->flag |= FLAG_R;
 			else if (*argv[*i] == 'R')
 				ls->flag |= FLAG_UP_R;
@@ -85,14 +85,14 @@ int				main(int ac, char **argv)
 	if ((ac > 1 && i < ac && !ls->flag && ++i) || (ac > i && ls->flag))
 	{
 		while (i < ac)
-			//read_info(ls, argv[i++]);
+			ft_ls_read_info(ls, argv[i++]);
 		//sort_lists(ls, ls->files);
-		//check_dir(ls, ls->files->head);
+		ft_ls_check_if_dir(ls, ls->files->head);
 	}
 	else if (ls->flag & FLAG_D)
-		//read_info(ls, ".");
+		ft_ls_read_info(ls, ".");
 	else
-		//read_dir_info(ls, ".");
+		ft_ls_read_dir_info(ls, ".");
 	//printing functions(ls);
 	return (0);
 }

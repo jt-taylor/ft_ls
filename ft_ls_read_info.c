@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 14:11:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/06 17:41:13 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/07 17:55:31 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ static inline void		ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
 	(n > dir->s_link) ? dir->s_link = n : 0;
 	ft_ls_check_time(file);
 }
+
+
 
 /*
 ** so basically we are calling lstat and copyin all of the data into

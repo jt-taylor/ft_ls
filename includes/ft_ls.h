@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 11:48:14 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/05 19:39:33 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/07 16:05:46 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@
 # define FLAG_N 0x20
 # define FLAG_G 0x40
 # define FLAG_D 0x80
+
+/*
+** the flags should function the same as they do for ls
+** 		-l	long format
+** 		-a	include '.' files
+** 		-r	reverse the sort order
+** 		-R	search dirs recursivly
+** 		-t	sort by time;
+** 		-n	display user and group id's numerically rather than converting
+** 		-g	display the group name , not sure if i'm going to implement it
+** 		-d	directories are listed as plain files and not searched recursively
+*/
 
 # define FT_LS_MALLOC_ERROR 1;
 
