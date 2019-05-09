@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 14:11:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/07 17:55:31 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 20:43:40 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 ** 		how it's gonna work
 */
 
-static inline void		ft_ls_check_time(t_ft_ls *file)
+static inline void		ft_ls_check_time(t_ft_ls_info *file)
 {
 	time_t	current;
 	char	*str;

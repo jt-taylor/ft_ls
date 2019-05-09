@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:57:43 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 00:13:12 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 20:32:32 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char					*ft_ls_strjoin_dir(const char *s1, const char *s2)
 	begin = d;
 	if (d == NULL)
 		return (NULL);
-	ftbzero(d, (t_strlen(s1) + ft_strlen(s2) + 1));
+	ft_bzero(d, (ft_strlen(s1) + ft_strlen(s2) + 1));
 	while (*s1 != '\0')
 		*d++ = *s1++;
 	if (*(s1 - 1) != '/')

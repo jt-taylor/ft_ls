@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 11:48:14 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/07 16:05:46 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 20:26:11 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,12 @@ typedef struct				s_ft_ls
 void						ft_ls_read_info(t_ft_ls *ls, char *argv);
 void						ft_ls_error_msg(const char flag);
 t_ft_ls_info				*ft_ls_new_file_elem(t_ft_ls_dir *dir);
+void		ft_ls_sort_list_elem(t_ft_ls *ls, t_ft_ls_dir *dir);
+void			ft_ls_check_file_mode(t_ft_ls_info *file, unsigned int mode,
+		char *permfile);
+void				ft_ls_error_msg(const char flag);
+char					*ft_ls_strjoin_dir(const char *s1, const char *s2);
+void					ft_ls_read_dir_info(t_ft_ls *ls, const char *name);
+void					ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file);
 
 #endif

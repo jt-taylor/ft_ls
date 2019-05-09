@@ -6,11 +6,11 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 19:56:09 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/05 20:18:13 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 20:13:09 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls"
+#include "ft_ls.h"
 
 /*
 ** here is a link for testing filetype
@@ -60,11 +60,15 @@ static inline void	ft_ls_check_file_type(const unsigned int *mode,
 ** 		see			https://www.gnu.org/software/libc/manual/html_node/
 ** 		Permission-Bits.html#Permission-Bits
 ** 		gotta split the link cause of norm :{
+** 		
+** 		file is unused right now -- would be used to check for ACL and xattr
+** 			if i go back and put those in
 */
 
 void			ft_ls_check_file_mode(t_ft_ls_info *file, unsigned int mode,
 		char *permfile)
 {
+	(file) ? 0 : 0;
 	ft_ls_check_file_type((const unsigned int *)&mode, permfile);
 	permfile[1] = (char)((mode & S_IRUSR) ? 'r' : '-');
 	permfile[2] = (char)((mode & S_IWUSR) ? 'w' : '-');

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 00:13:10 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/08 20:25:07 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void				ft_ls_error_msg(const char flag)
 
 static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 {
-	while (argv[++(*i)], && argv[*i][0] == '-' && argv[*i][1] && ++argv[*i])
+	while (argv[++(*i)] && argv[*i][0] == '-' && argv[*i][1] && ++argv[*i])
 	{
 		while (*argv[*i] && *argv[*i] != '\0')
 		{
@@ -86,7 +86,7 @@ int				main(int ac, char **argv)
 	{
 		while (i < ac)
 			ft_ls_read_info(ls, argv[i++]);
-		//sort_lists(ls, ls->files);
+		ft_ls_sort_list(ls, ls->files);
 		ft_ls_check_if_dir(ls, ls->files->head);
 	}
 	else if (ls->flag & FLAG_D)
