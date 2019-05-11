@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 11:48:14 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 20:26:11 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/10 22:43:16 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@
 ** 		-d	directories are listed as plain files and not searched recursively
 */
 
-# define FT_LS_MALLOC_ERROR 1;
+# define FT_LS_MALLOC_ERROR 1
 
-typedef struct				s_ft_ls_info
+typedef struct		s_ft_ls_info
 {
 	char				*name_file;
 	char				*pwd;
@@ -64,9 +64,9 @@ typedef struct				s_ft_ls_info
 	struct group		*group;
 	struct s_ft_ls_info	*next;
 	struct s_ft_ls_info	*prev;
-}							t_ft_ls_info;
+}					t_ft_ls_info;
 
-typedef struct				s_ft_ls_dir
+typedef struct		s_ft_ls_dir
 {
 	char				*name;
 	char				close : 1;
@@ -79,9 +79,9 @@ typedef struct				s_ft_ls_dir
 	size_t				s_link;
 	struct s_ft_ls_dir	*next;
 	struct s_ft_ls_dir	*prev;
-}							t_ft_ls_dir;
+}					t_ft_ls_dir;
 
-typedef struct				s_ft_ls
+typedef struct		s_ft_ls
 {
 	DIR					*fd_dir;
 	struct dirent		*file;
@@ -90,21 +90,23 @@ typedef struct				s_ft_ls
 	t_ft_ls_dir			*files;
 	t_ft_ls_dir			*dirs;
 	t_ft_ls_dir			*last_dir;
-}							t_ft_ls;
+}					t_ft_ls;
 
 /*
 ** Prototypes
 */
 
-void						ft_ls_read_info(t_ft_ls *ls, char *argv);
-void						ft_ls_error_msg(const char flag);
-t_ft_ls_info				*ft_ls_new_file_elem(t_ft_ls_dir *dir);
-void		ft_ls_sort_list_elem(t_ft_ls *ls, t_ft_ls_dir *dir);
-void			ft_ls_check_file_mode(t_ft_ls_info *file, unsigned int mode,
-		char *permfile);
+void				ft_ls_read_info(t_ft_ls *ls, char *argv);
 void				ft_ls_error_msg(const char flag);
-char					*ft_ls_strjoin_dir(const char *s1, const char *s2);
-void					ft_ls_read_dir_info(t_ft_ls *ls, const char *name);
-void					ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file);
+t_ft_ls_info		*ft_ls_new_file_elem(t_ft_ls_dir *dir);
+t_ft_ls_dir			*ft_ls_new_dir_elem(t_ft_ls *ls, const char *name);
+void				ft_ls_sort_list_elem(t_ft_ls *ls, t_ft_ls_dir *dir);
+void				ft_ls_check_file_mode(unsigned int mode, char *permfile);
+void				ft_ls_error_msg(const char flag);
+char				*ft_ls_strjoin_dir(const char *s1, const char *s2);
+void				ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
+void				ft_ls_read_dir_info(t_ft_ls *l, const char *name);
+void				ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file);
+void				ft_ls_sort_list_elem(t_ft_ls *ls, t_ft_ls_dir *dir);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 14:11:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 20:43:40 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/10 23:05:25 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,30 @@ static inline void		ft_ls_check_time(t_ft_ls_info *file)
 	{
 		str = ft_strdup(file->data);
 		ft_bzero(file->data, 25);
-		ft_strncpy(&file->data, str, 10);
+		ft_strncpy(&file->data[0], str, 10);
 		file->data[10] = ' ';
 		ft_strncpy(&file->data[11], &str[19], 5);
 		free(str);
 	}
 }
+
+/*
+** this function calls readlink , heres the man for readlink
+**
+** Description
+** The readlink() function shall place the contents of the symbolic link 
+** referred to by path in the buffer buf which has size bufsize. If the number
+** of bytes in the symbolic link is less than bufsize, the contents of the
+** remainder of buf are unspecified. If the buf argument is not large enough to
+** contain the link content, the first bufsize bytes shall be placed in buf.
+**
+** If the value of bufsize is greater than {SSIZE_MAX}, the result is
+** implementation-defined.
+**
+** Return Value
+** Upon successful completion, readlink() shall return the count of bytes placed in the buffer. Otherwise, it shall return a value of -1, leave the buffer unchanged, and set errno to indicate the error.
+**
+*/
 
 static inline void		ft_ls_read_link(t_ft_ls_info *file)
 {
@@ -44,24 +62,24 @@ static inline void		ft_ls_read_link(t_ft_ls_info *file)
 	ssize_t	size;
 
 	alt = malloc(PATH_MAX);
-	ft_bzero*(alt, PATH_MAX);
+	ft_bzero(alt, PATH_MAX);
 	if (file->pwd)
 		size = readlink(file->pwd, alt, PATH_MAX);
 	else
-		size = readlink(file->name_file, buf, PATH_MAX);
+		size = readlink(file->name_file, alt, PATH_MAX);
 	alt[size] = '\0';
 	file->name_file = ft_strjoin(file->name_file, " -> ");
 	file->name_file = ft_strjoin(file->name_file, alt);;
 	free(alt);
 }
 
-static inline void		ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
+void		ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
 		t_ft_ls_info *file)
 {
 	size_t		n;
 
-	lstat(file->pwd, &ls->ls->stat);
-	file->nlinks = ls->stat.st_nlinks;
+	lstat(file->pwd, &ls->stat);
+	file->nlinks = ls->stat.st_nlink;
 	file->uid = ls->stat.st_uid;
 	file->gid = ls->stat.st_gid;
 	file->group = getgrgid(file->gid);

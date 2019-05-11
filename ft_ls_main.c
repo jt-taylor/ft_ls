@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 20:25:07 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/10 17:10:18 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 void				ft_ls_error_msg(const char flag)
 {
-	ft_dprintf(2, "ls: illegal option --%c\nusage:ls [-larRtnGd] [file...]\n");
+	ft_dprintf(2, "ls: illegal option --%c\nusage:ls [-larRtnGd] [file...]\n",
+			flag);
 }
 
 /*
@@ -51,7 +52,7 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 			else if (*argv[*i] == 'D')
 				ls->flag |= FLAG_D;
 			else
-				ft_ssl_error_msg(*argv[*i]);
+				ft_ls_error_msg(*argv[*i]);
 			++argv[*i];
 		}
 	}
@@ -68,6 +69,30 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 **
 ** 	then it prints the collected data
 */
+
+
+/*
+** note for future me 
+**
+** this should never be used in something that doesn't terminate ,
+** 		the memory is free by the os on exit , so if this is
+** 		used by something like a daemon the memory is never released and
+** 		will just sit there untill the maximum process memory limit is reached
+** This is conciouslly leaving the cleanup to the os because
+** 		this only has to work on scholl macs , and maybe future me needs a the
+** 		double linked list somewhere
+** i know i am repeating myself but there are no mallocs outside the structs
+** 		in the dblnk list , which are all accesible from the main
+**
+**
+**
+** 		again i just want to reiterate , I'm not (not ?) freeing anything because
+** 			im lazy
+** 		I'm not freeing anything bevause ther is not point in manually freeing
+** 			everything right before program exit (ie why free everything manually
+** 				when the os is going to do it right after )
+*/
+
 int				main(int ac, char **argv)
 {
 	t_ft_ls		*ls;
@@ -86,7 +111,7 @@ int				main(int ac, char **argv)
 	{
 		while (i < ac)
 			ft_ls_read_info(ls, argv[i++]);
-		ft_ls_sort_list(ls, ls->files);
+		ft_ls_sort_list_elem(ls, ls->files);
 		ft_ls_check_if_dir(ls, ls->files->head);
 	}
 	else if (ls->flag & FLAG_D)
@@ -94,5 +119,6 @@ int				main(int ac, char **argv)
 	else
 		ft_ls_read_dir_info(ls, ".");
 	//printing functions(ls);
+	// free function lol ;
 	return (0);
 }

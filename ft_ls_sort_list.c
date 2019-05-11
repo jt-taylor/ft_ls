@@ -6,11 +6,12 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:32:51 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 19:58:42 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/10 16:51:09 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
 
 /*
 ** sort by name and sort by time work the same just comparing (time / name)
@@ -21,6 +22,11 @@
 ** 	the better option would be to use merge sort for the double linked list
 ** 		but that adds more complexity as far as managing the splitting and
 ** 		merging of all of the partial linked lists
+**
+** 		the reason this sorting implementation is so slow is because we only
+** 			ever compare adjacent elements in the list so things can only ever
+** 			swap places with the element next to it and we have to move each
+** 			element one by one instead of just jumping to wear it belongs
 ** 	tldr	this should be much slower than merge sort but i don't feel that
 ** 			the speed will be an issue , it's already gonna be slow with
 ** 			recursion anyway
@@ -57,6 +63,10 @@ static inline void	ft_ls_swap_list_elem(t_ft_ls_info *a, t_ft_ls_info *b)
 	a->prev = b;
 }
 
+/*
+** sort the list by the ->mtime value
+*/
+
 static inline void	ft_ls_sort_lists_bytime(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 {
 	int		i;
@@ -85,6 +95,10 @@ static inline void	ft_ls_sort_lists_bytime(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 		}
 	}
 }
+
+/*
+**		sort the linked list by the ->name_file
+*/
 
 static inline void	ft_ls_sort_lists_byname(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 {

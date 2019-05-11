@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 19:56:09 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 20:13:09 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/09 01:06:04 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ static inline void	ft_ls_check_file_type(const unsigned int *mode,
 ** 			if i go back and put those in
 */
 
-void			ft_ls_check_file_mode(t_ft_ls_info *file, unsigned int mode,
-		char *permfile)
+void			ft_ls_check_file_mode(unsigned int mode, char *permfile)
 {
-	(file) ? 0 : 0;
 	ft_ls_check_file_type((const unsigned int *)&mode, permfile);
 	permfile[1] = (char)((mode & S_IRUSR) ? 'r' : '-');
 	permfile[2] = (char)((mode & S_IWUSR) ? 'w' : '-');

@@ -6,14 +6,14 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:55:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/08 20:32:32 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/10 17:03:41 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**
+**		this creates a new element in the dir list
 */
 
 t_ft_ls_dir					*ft_ls_new_dir_elem(t_ft_ls *ls, const char *name)
@@ -21,7 +21,7 @@ t_ft_ls_dir					*ft_ls_new_dir_elem(t_ft_ls *ls, const char *name)
 	if (!ls->dirs)
 	{
 		ls->dirs = (t_ft_ls_dir *)malloc(sizeof(t_ft_ls_dir));
-		ft_bzero(ls->dirs (sizeof(ft_ls_dir)));
+		ft_bzero(ls->dirs (sizeof(t_ft_ls_dir)));
 		ls->dirs->name = ft_strdup(name);
 		ls->dirs->prev = NULL;
 		ls->last_dir = ls->dirs;
@@ -29,8 +29,8 @@ t_ft_ls_dir					*ft_ls_new_dir_elem(t_ft_ls *ls, const char *name)
 	}
 	else
 	{
-		ls->last_dir->next = (t_ft_ls_dir *)malloc(sizeof(t_ls_dir));
-		ft_bzero(ls->last_dir->next, sizeof(ft_ft_ls_dir));
+		ls->last_dir->next = (t_ft_ls_dir *)malloc(sizeof(t_ft_ls_dir));
+		ft_bzero(ls->last_dir->next, sizeof(t_ft_ls_dir));
 		ls->last_dir->next->name = ft_strdup(name);
 		ls->last_dir->next->prev = ls->last_dir;
 		ls->last_dir = ls->last_dir->next;
