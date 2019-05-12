@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/10 17:10:18 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/12 13:43:22 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,6 @@ int				main(int ac, char **argv)
 		ft_ls_read_dir_info(ls, ".");
 	//printing functions(ls);
 	// free function lol ;
+	sleep(100);
 	return (0);
 }

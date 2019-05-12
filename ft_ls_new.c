@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 18:55:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/11 04:03:27 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/12 14:03:43 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_ft_ls_info				*ft_ls_new_file_elem(t_ft_ls_dir *dir)
 	if (!dir->head)
 	{
 		dir->head = (t_ft_ls_info *)malloc(sizeof(t_ft_ls_info));
-		ft_bzero(dir->last_file->next, sizeof(t_ft_ls_info));
+		ft_bzero(dir->head, sizeof(t_ft_ls_info));
 		dir->last_file = dir->head;
 		dir->last_file->prev = NULL;
 		return (dir->head);
