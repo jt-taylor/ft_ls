@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:57:43 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/10 17:04:58 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/11 03:32:04 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void					ft_ls_read_dir_info(t_ft_ls *ls, const char *name)
 			continue ;
 		file = ft_ls_new_file_elem(dir);
 		file->name_file = ft_strdup(ls->file->d_name);
-		file->pwd = ft_ls_strjoin_dir(dir_name, file->name_file);
+		file->pwd = ft_ls_strjoin_dir(dir->name, file->name_file);
 		if (ls->flag & FLAG_L || ls->flag & FLAG_N || ls->flag & FLAG_T
 				|| ls->flag & FLAG_G || ls->flag & FLAG_UP_R)
 			ft_ls_read_file_info(ls, dir, file);
@@ -69,7 +69,7 @@ void					ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file)
 {
 	while (file)
 	{
-		if (file->mode[0] = 'd' && !(ls->flag & FLAG_D))
+		if (file->mode[0] == 'd' && !(ls->flag & FLAG_D))
 			ft_ls_read_dir_info(ls, file->name_file);
 		file = file->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/08 13:32:51 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/10 16:51:09 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/11 23:15:53 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 ** 			recursion anyway
 */
 
-static inline void	ft_ls_strlen_list_elem(t_ft_ls_info *list)
+static inline int	ft_ls_strlen_list_elem(t_ft_ls_info *list)
 {
 	int	i;
 
@@ -74,7 +74,7 @@ static inline void	ft_ls_sort_lists_bytime(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 	int		len;
 
 	i = -1;
-	len = ft_ls_strlen_list(dir->head) - 1;
+	len = ft_ls_strlen_list_elem(dir->head) - 1;
 	while (++i < len)
 	{
 		j = -1;
@@ -83,10 +83,10 @@ static inline void	ft_ls_sort_lists_bytime(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 		{
 			if ((tmp->mtime < tmp->next->mtime) ||
 					((tmp->mtime == tmp->next->mtime) &&
-					 (ft_strcmp(tmp->name_file, tmp->next_name_file) > 0)))
+					 (ft_strcmp(tmp->name_file, tmp->next->name_file) > 0)))
 			{
 				(&dir->head->size == &tmp->size) ? dir->head = tmp->next : 0;
-				(&dir->last_file->size == tmp->next->size) ?
+				(&dir->last_file->size == &tmp->next->size) ?
 					dir->last_file = tmp : 0;
 				ft_ls_swap_list_elem(tmp, tmp->next);
 			}
@@ -107,7 +107,7 @@ static inline void	ft_ls_sort_lists_byname(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 	int		len;
 
 	i = -1;
-	len = ft_ls_strlen_list(dir->head) - 1;
+	len = ft_ls_strlen_list_elem(dir->head) - 1;
 	while (++i < len)
 	{
 		j = -1;
@@ -119,7 +119,7 @@ static inline void	ft_ls_sort_lists_byname(t_ft_ls_dir *dir, t_ft_ls_info *tmp)
 				(&dir->head->size == &tmp->size) ? dir->head = tmp->next : 0;
 				(&dir->last_file->size == &tmp->next->size)
 				? dir->last_file = tmp : 0;
-				swap_elem(tmp, tmp->next);
+				ft_ls_swap_list_elem(tmp, tmp->next);
 			}
 			if (tmp->next)
 				tmp = tmp->next;

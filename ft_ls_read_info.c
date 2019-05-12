@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 14:11:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/10 23:05:25 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/11 22:53:07 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,16 +89,16 @@ void		ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
 	file->rdev = ls->stat.st_rdev;
 	file->size = ls->stat.st_size;
 	file->mtime = (size_t)ls->stat.st_mtime;
-	ft_ls_check_file_mode(file, ls->stat.st_mode, &file->mode[0]);
-	(file->mode[0] == 'l') ? ft_ls_find_link(file) : 0;
+	ft_ls_check_file_mode(ls->stat.st_mode, &file->mode[0]);
+	(file->mode[0] == 'l') ? ft_ls_read_link(file) : 0;
 	(file->mode[0] == 'c') ? dir->s_size = 8 : 0;
 	n = (file->group) ? ft_strlen(file->group->gr_name) + 1 : 0;
 	(n > dir->s_group) ? dir->s_group = n : 0;
 	n = (file->pwuid) ? ft_strlen(file->pwuid->pw_name) + 1 : 0;
 	(n > dir->s_name) ? dir->s_name = n : 0;
-	n = ft_count(file->size, 10);
+	n = ft_count_num_len(file->size, 10);
 	(n > dir->s_size) ? dir->s_size = n : 0;
-	n = ft_count(file->nlinks, 10);
+	n = ft_count_num_len(file->nlinks, 10);
 	(n > dir->s_link) ? dir->s_link = n : 0;
 	ft_ls_check_time(file);
 }
@@ -116,9 +116,9 @@ void					ft_ls_read_info(t_ft_ls *ls, char *argv)
 	int					num;
 
 	num = lstat(argv, &ls->stat);
-	file = ft_ls_new_file_elem(ls->files);
-	file->name_file = ft_strdup(argv);
+	info_file = ft_ls_new_file_elem(ls->files);
+	info_file->name_file = ft_strdup(argv);
 	if (num >= 0)
-		ft_ls_read_file_info(ls, ls->files, file);
+		ft_ls_read_file_info(ls, ls->files, info_file);
 	ft_bzero(&ls->stat, sizeof(ls->stat));
 }
