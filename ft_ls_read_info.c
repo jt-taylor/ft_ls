@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 14:11:34 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/11 22:53:07 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/20 22:59:48 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ void					ft_ls_read_info(t_ft_ls *ls, char *argv)
 	num = lstat(argv, &ls->stat);
 	info_file = ft_ls_new_file_elem(ls->files);
 	info_file->name_file = ft_strdup(argv);
+	(num < 0) ? info_file->fail = 1 : 0;
 	if (num >= 0)
 		ft_ls_read_file_info(ls, ls->files, info_file);
 	ft_bzero(&ls->stat, sizeof(ls->stat));

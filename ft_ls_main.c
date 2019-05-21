@@ -6,15 +6,11 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/12 13:43:22 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/20 22:51:09 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*
-** mabey i should just macro this ?
-*/
 
 void				ft_ls_error_msg(const char flag)
 {
@@ -58,17 +54,11 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 	}
 }
 
-/*
-** sets up the ls structure with ls->files also allocated for
-** checks for the flags (uses bitfields to store flags)
-** if arguments were provided with no flags or flags were provided
-** 		it will read then sort then check directories according to the d flag
-** 	or if there was at least the d flag with no arguments
-** 		it will list the current dir without recursion of dir's
-** 	otherwise it works on the current dir
-**
-** 	then it prints the collected data
-*/
+void				ft_error(char *str, char c)
+{
+	ft_dprintf(2, "ft_ls: %s:%s", str, (c) ? "Permission Denied\n" :
+			"No such file or directory\n");
+}
 
 
 /*
@@ -83,14 +73,18 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 ** 		double linked list somewhere
 ** i know i am repeating myself but there are no mallocs outside the structs
 ** 		in the dblnk list , which are all accesible from the main
+*/
+
+/*
+** sets up the ls structure with ls->files also allocated for
+** checks for the flags (uses bitfields to store flags)
+** if arguments were provided with no flags or flags were provided
+** 		it will read then sort then check directories according to the d flag
+** 	or if there was at least the d flag with no arguments
+** 		it will list the current dir without recursion of dir's
+** 	otherwise it works on the current dir
 **
-**
-**
-** 		again i just want to reiterate , I'm not (not ?) freeing anything because
-** 			im lazy
-** 		I'm not freeing anything bevause ther is not point in manually freeing
-** 			everything right before program exit (ie why free everything manually
-** 				when the os is going to do it right after )
+** 	then it prints the collected data
 */
 
 int				main(int ac, char **argv)
@@ -118,8 +112,6 @@ int				main(int ac, char **argv)
 		ft_ls_read_info(ls, ".");
 	else
 		ft_ls_read_dir_info(ls, ".");
-	//printing functions(ls);
-	// free function lol ;
-	sleep(100);
+	ft_ls_printing(ls);
 	return (0);
 }

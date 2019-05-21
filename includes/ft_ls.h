@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 11:48:14 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/11 18:06:07 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/20 22:59:48 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_ft_ls_info
 	char				*pwd;
 	char				*name_group;
 	char				*name_user;
-	char				fail_file : 1;
+	char				fail : 1;
 	char				mode[12];
 	char				data[25];
 	nlink_t				nlinks;
@@ -108,7 +108,13 @@ void				ft_ls_read_file_info(t_ft_ls *ls, t_ft_ls_dir *dir,
 		t_ft_ls_info *file);
 void				ft_ls_read_dir_info(t_ft_ls *l, const char *name);
 void				ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file);
-void				ft_ls_sort_list_elem(t_ft_ls *ls, t_ft_ls_dir *dir);
 size_t				ft_count_num_len(intmax_t n, short int base);
-
+void				ft_ls_print_ln(t_ft_ls_info *info, t_ft_ls *ls,
+		t_ft_ls_dir *dir);
+void				ft_ls_print_just(t_ft_ls_dir *dir, char flag);
+void				ft_ls_output_handle(t_ft_ls *ls, t_ft_ls_dir *dir,
+		t_ft_ls_dir **next);
+void				ft_error(char *str, char c);
+void				ft_ls_printing(t_ft_ls *ls);
+void		ft_ls_recursion(t_ft_ls *ls, t_ft_ls_dir *dir);
 #endif

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 19:56:09 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/09 01:06:04 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/20 18:46:56 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static inline void	ft_ls_check_file_type(const unsigned int *mode,
 ** 		
 ** 		file is unused right now -- would be used to check for ACL and xattr
 ** 			if i go back and put those in
+** 	'b' && 'c' are for (block // charector) special files created by mknod()
+** 			these are interfaces with the kernal for device drivers
 */
 
 void			ft_ls_check_file_mode(unsigned int mode, char *permfile)
