@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/18 16:54:06 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/20 22:59:48 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/21 01:27:01 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ft_ls_recursion(t_ft_ls *ls, t_ft_ls_dir *dir)
 	{
 		ls_dir_info(ls, dir);
 		if (&last->name == &dir->name)
-			break;
+			break ;
 		write(1, "\n", 1);
 		dir = dir->next;
 	}

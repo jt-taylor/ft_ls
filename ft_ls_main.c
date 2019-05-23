@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/05 12:21:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/20 22:51:09 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/21 03:45:56 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static inline void	check_flags(t_ft_ls *ls, char **argv, int *i)
 				ls->flag |= FLAG_UP_R;
 			else if (*argv[*i] == 't')
 				ls->flag |= FLAG_T;
-			else if (*argv[*i] == 'N')
+			else if (*argv[*i] == 'n')
 				ls->flag |= FLAG_N;
 			else if (*argv[*i] == 'G')
 				ls->flag |= FLAG_G;
-			else if (*argv[*i] == 'D')
+			else if (*argv[*i] == 'd')
 				ls->flag |= FLAG_D;
 			else
 				ft_ls_error_msg(*argv[*i]);

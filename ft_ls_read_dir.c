@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/07 15:57:43 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/17 03:27:08 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/05/21 01:27:01 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void					ft_ls_check_if_dir(t_ft_ls *ls, t_ft_ls_info *file)
 	}
 }
 
+/* does this get used anywhere ?
+**/
 void					ft_ls_dir_recursion_printing(t_ft_ls *ls,
 		t_ft_ls_dir *dir)
 {
