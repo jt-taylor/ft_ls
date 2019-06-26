@@ -5,22 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/11 18:03:18 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/05/11 18:05:48 by jtaylor          ###   ########.fr       */
+/*   Created: 2019/06/24 15:56:38 by jtaylor           #+#    #+#             */
+/*   Updated: 2019/06/25 15:51:46 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-size_t		ft_count_num_len(intmax_t n, short int base)
+/*
+** this checks that the file for a dir has the 'd' mode
+** then reads the data for the dir
+*/
+void		validate_dir(t_ls *ls, t_file_info *file)
 {
-	size_t		i;
-
-	i = (n >= 0) ? 1 : 2;
-	while (n / base != 0)
+	while (file)
 	{
-		n /= base;
-		i++;
+		(file->mode[0] == 'd') ? ft_ls_read_dir_info(ls, file->name_file) : 0;
+		file = file->next;
 	}
-	return (i);
+}
+
+/*
+** this is basically strjoin but it is adding the '/' instead of calling strjoin
+** an extra time
+** somtimes mallocs an extra (char) if the end of the s1 is already '/'
+*/
+
+char	*ft_join_dir(const char *s1, const char *s2)
+{
+	char	*d;
+	char	*start;
+
+	if (s1 == NULL || s2 == NULL)
+		return (NULL);
+	if (!(d = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 2))))
+		return (NULL);
+	start = d;
+	ft_bzero(d, (ft_strlen(s1) + ft_strlen(s2) + 2));
+	while (*s1 != '\0')
+		*d++ = *s1++;
+	if (*(s1 - 1) != '/')
+		*d++ = '/';
+	while (*s2 != '\0')
+		*d++ = *s2++;
+	*d = '\0';
+	return (start);
+}
+
+/*
+** this returns the number of charectors needed to a  number in a given base
+*/
+size_t		ft_nbrlen(intmax_t num, uint8_t base)
+{
+	size_t	c;
+	
+	if (num >= 0)
+		c = 1;
+	else if (num < 0)
+		c = 2;
+	while (num / base != 0)
+	{
+		num /= base;
+		c++;
+	}
+	return (c);
 }
