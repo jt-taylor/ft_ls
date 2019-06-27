@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 12:05:19 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/25 15:38:17 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/27 12:37:42 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 	if ((ls->fd_dir = opendir(dir_name)) <= 0)
 	{
 		dir->close = 1;
-		return;
+		return ;
 	}
 	while ((ls->file = readdir(ls->fd_dir)))
 	{
@@ -114,8 +114,12 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 			ft_ls_read_file_info(ls, dir, file);
 		dir->total += ls->stat.st_blocks;
 		ft_bzero(&ls->stat, sizeof(ls->stat));
+		//
+		ft_printf("reading the dir info\n");
 	}
 	closedir(ls->fd_dir);
+	//
+	ft_printf("dir_name = %s\n", dir_name);
 }
 
 /*
@@ -130,7 +134,7 @@ void	ft_ls_read_info(t_ls *ls, char *argv)
 
 	file = new_file_elem(ls->files);
 	file->name_file = ft_strdup(argv);
-	if (!lstat(argv, &ls->stat))
+	if (lstat(argv, &ls->stat) < 0)
 		file->failure = 1;
 	else
 		ft_ls_read_file_info(ls, ls->files, file);

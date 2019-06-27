@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:53:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 22:05:33 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/27 14:32:17 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,16 @@ int		main(int ac, char **argv)
 	ft_bzero(ls->files, sizeof(t_dir_info));
 	if (ac > 1 && argv[1][0] == '-' && argv[1][1])
 		i = ft_ls_check_flags(ls, argv, ac);
-	if ((ac > 1 && ++i) || (ac > i && ls->flag))
+	//
+	ft_printf("val i = %d and ac == %d", i, ac);
+	if ((ac > 1 && i < ac && !ls->flag && ++i) || (ac > i && ls->flag))
 	{
 		while (i < ac)
 			ft_ls_read_info(ls, argv[i++]);
 		ft_ls_sort_lists(ls, ls->files);
 		validate_dir(ls, ls->files->head);
+		//
+		ft_printf("in the main\n");
 	}
 	else
 		ft_ls_read_dir_info(ls, ".");

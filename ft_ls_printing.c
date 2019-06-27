@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:42:58 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 22:25:53 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/27 13:50:16 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ void	ft_ls_print_long(t_file_info *file, t_ls *ls, t_dir_info *dir)
 	while (file)
 	{
 		if (file->failure)
+		{
+			file = (ls->flag & FLAG_LO_R) ? file->prev : file->next;
 			continue ;
+		}
 		(file->mode[0] == 'c' || file->mode[0] == 'b') ? ft_printf("%s %*d %-*s\
 				%-*s %3d, %3d %-12.12s", file->mode,
 				dir->s_link, file->nlinks, dir->s_name, file->name_user,
@@ -64,7 +67,11 @@ static int	ft_ls_print_error_files(t_ls *ls, t_file_info *file)
 	while (tmp)
 	{
 		if (tmp->failure)
+		{
 			ft_ls_error(tmp->name_file, 0);
+			//
+			ft_printf("is in ft_ls_print_error\n");
+		}
 		else
 			i = 1;
 		tmp = tmp->next;
@@ -98,6 +105,8 @@ void		print_output_handle(t_ls *ls, t_dir_info *dir, t_dir_info **point)
 		((dir->prev && ls->flag & FLAG_LO_R) || (dir->next && !(ls->flag &
 				FLAG_LO_R))) ? write(1, "\n", 1): 0;
 		dir = (ls->flag & FLAG_LO_R) ? dir->prev : dir->next;
+		//
+		ft_printf("printing dir handle\n");
 	}
 }
 
@@ -113,9 +122,12 @@ void		ft_ls_printing(t_ls *ls)
 		files = (ls->files->head) ? ft_ls_print_error_files(ls, ls->files->head) : 0;
 	(ls->files->head && files && ls->dirs) ? write(1, "\n", 1) : 0;
 	if (ls->flag & FLAG_UP_R)
-		;//recursion :{
+		ft_ls_recursion(ls, ls->dirs);
 	else if (ls->flag & FLAG_LO_R)
 		print_output_handle(ls, ls->last_dir, &ls->last_dir->prev);
 	else
 		print_output_handle(ls, ls->dirs, &ls->dirs->next);
+	//made it here
+	ft_printf("made end of printing\n");
+	ft_printf("%08b is flag value\n", ls->flag);
 }

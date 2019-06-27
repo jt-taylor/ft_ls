@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:36:12 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 22:27:56 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/27 12:00:42 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,9 @@ void	ft_ls_recursion(t_ls *ls, t_dir_info *dir)
 			break ;
 		write(1, "\n", 1);
 		dir = dir->next;
+		//
+		ft_printf("is going through dir");
 	}
+	//
+	ft_printf("made it into recursion\n");
 }
