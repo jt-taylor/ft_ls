@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 15:56:38 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/25 15:51:46 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/26 21:11:31 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,15 @@ size_t		ft_nbrlen(intmax_t num, uint8_t base)
 		c++;
 	}
 	return (c);
+}
+
+/*
+** do i really need to explain what this does
+** also why did i not just make this a macro if it is only one comamnd
+** 		the world may never know
+*/
+void		ft_ls_error(char *str, char witch)
+{
+	ft_dprintf(2, "ft_ls: %s: %s", str, ((witch) ? ": Permission denied\n" :\
+				": No such file or directory\n"));
 }

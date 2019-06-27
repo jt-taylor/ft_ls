@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:34:41 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/25 16:00:22 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/26 22:27:10 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,19 @@ void		ft_ls_sort_lists(t_ls *ls, t_dir_info *dir);
 void		validate_dir(t_ls *ls, t_file_info *file);
 char	*ft_join_dir(const char *s1, const char *s2);
 size_t		ft_nbrlen(intmax_t num, uint8_t base);
+void		ft_ls_error(char *str, char witch);
+
+/*
+** ft_ls_recursion
+*/
+void	ft_ls_recursion(t_ls *ls, t_dir_info *dir);
 
 /*
 ** ft_ls_printing.c
 */
 void		ft_ls_printing(t_ls *ls);
+void		print_output_handle(t_ls *ls, t_dir_info *dir, t_dir_info **point);
+void		ft_ls_print_long(t_file_info *file, t_ls *ls, t_dir_info *dir);
+void		ft_ls_print_simple(t_dir_info *dir, char flag);
 
 #endif

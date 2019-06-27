@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:53:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/25 15:57:46 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/26 22:05:33 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ static inline void	ft_usage(char c)
 ** stored in a unsigned char
 */
 
-static int	ft_ls_check_flags(t_ls *ls, char **argv)
+static int	ft_ls_check_flags(t_ls *ls, char **argv, int ac)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = 1;
-	while (++i && argv[i][0] == '-' && argv[i][0])
+	while (++i && argv[i][0] && argv[i][0] == '-')
 	{
+		j = 1;
 		while (argv[i][j])
 		{
-			if (argv[j][j] == 'l')
+			if (argv[i][j] == 'l')
 				ls->flag |= FLAG_LO_L;
 			else if (argv[i][j] == 'a')
 				ls->flag |= FLAG_LO_A;
@@ -50,6 +51,8 @@ static int	ft_ls_check_flags(t_ls *ls, char **argv)
 				ft_usage(argv[i][j]);
 			j++;
 		}
+		if (i == ac - 1)
+			break ;
 	}
 	return (i);
 }
@@ -74,7 +77,7 @@ int		main(int ac, char **argv)
 	ls->files = (t_dir_info *)malloc(sizeof(t_dir_info));
 	ft_bzero(ls->files, sizeof(t_dir_info));
 	if (ac > 1 && argv[1][0] == '-' && argv[1][1])
-		i = ft_ls_check_flags(ls, argv);
+		i = ft_ls_check_flags(ls, argv, ac);
 	if ((ac > 1 && ++i) || (ac > i && ls->flag))
 	{
 		while (i < ac)

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 12:10:23 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/25 15:48:33 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/26 12:44:27 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 
 /*
 ** i don't think that i am going to handle xattr  &&  acl
+**
+** some notes on what all of the letters mean
+** '-'		a regular file
+** 'd'		a directory file
+** 'c'		a charector special file (ie direct access to a hardware device
+** 'b'		a block specil file -- is just a charectopr special file so that
+** 				you can read in increments other than full blocks , there
+** 				are also psudod-devices such as /dev/null && /dev/random
+** 'l'		a symbolic link file from
+** 			http://nersp.nerdc.ufl.edu/~dicke3/nerspcs/ls.html
+** 			The entry is a symbolic link, and either the -N flag was specified
+** 			or the symbolic link did not point to an existing file.
+** 'p'		First in - First out (FIFO) special file // (named pipe)
+** 			see http://man7.org/linux/man-pages/man7/fifo.7.html
+** 's'		a local socket
 */
 
 /*
