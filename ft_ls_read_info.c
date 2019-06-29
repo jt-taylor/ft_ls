@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 12:05:19 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/27 12:37:42 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/29 13:31:16 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,13 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 	}
 	while ((ls->file = readdir(ls->fd_dir)))
 	{
-		if (!(ls->flag & FLAG_LO_A) && ls->file->d_name[0] == '.')
-			continue;
+		// pretty sure this is the only place where the 'a' flag gets used
+		// i really don't know why it's stopping the executable from reading all the files
+		// without the 'a' falg being on and even then it still doesn't read everthing i really 
+		// have no idea
+		// the next if statement is proccing for some files in the directory that aren't dot files ??
+//		if (!(ls->flag & FLAG_LO_A) && (ls->file->d_name[0] == '.'))
+//			continue;
 		file = new_file_elem(dir);
 		file->name_file = ft_strdup(ls->file->d_name);
 		file->pwd = ft_join_dir(dir_name, file->name_file);
@@ -114,12 +119,10 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 			ft_ls_read_file_info(ls, dir, file);
 		dir->total += ls->stat.st_blocks;
 		ft_bzero(&ls->stat, sizeof(ls->stat));
-		//
-		ft_printf("reading the dir info\n");
 	}
 	closedir(ls->fd_dir);
 	//
-	ft_printf("dir_name = %s\n", dir_name);
+	ft_printf("//dir_name = %s\n", dir_name);
 }
 
 /*

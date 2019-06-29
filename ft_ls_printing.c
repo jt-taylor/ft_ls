@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:42:58 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/27 13:50:16 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/29 11:56:36 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	ft_ls_print_error_files(t_ls *ls, t_file_info *file)
 		{
 			ft_ls_error(tmp->name_file, 0);
 			//
-			ft_printf("is in ft_ls_print_error\n");
+			ft_printf("//is in ft_ls_print_error\n");
 		}
 		else
 			i = 1;
@@ -106,7 +106,7 @@ void		print_output_handle(t_ls *ls, t_dir_info *dir, t_dir_info **point)
 				FLAG_LO_R))) ? write(1, "\n", 1): 0;
 		dir = (ls->flag & FLAG_LO_R) ? dir->prev : dir->next;
 		//
-		ft_printf("printing dir handle\n");
+		ft_printf("//printing dir handle\n");
 	}
 }
 
@@ -128,6 +128,6 @@ void		ft_ls_printing(t_ls *ls)
 	else
 		print_output_handle(ls, ls->dirs, &ls->dirs->next);
 	//made it here
-	ft_printf("made end of printing\n");
-	ft_printf("%08b is flag value\n", ls->flag);
+	ft_printf("//made end of printing\n");
+	ft_printf("//%08b is flag value\n", ls->flag);
 }

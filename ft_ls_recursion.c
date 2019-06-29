@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:36:12 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/27 12:00:42 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/29 11:57:31 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static inline void	ft_ls_work(t_ls *ls, t_dir_info *dirt)
 		ft_printf("total %d\n", dirt->total);
 	if (dirt->head && ls->flag & FLAG_LO_L && ls->flag & FLAG_LO_R)
 		ft_ls_print_long(dirt->last_file, ls, dirt);
-	else if (ls->flag & FLAG_LO_R && ls->flag & FLAG_LO_L)
+	else if (ls->flag & FLAG_LO_L)
 		ft_ls_print_long(dirt->head, ls, dirt);
 	else
 		ft_ls_print_simple(dirt, ls->flag);
@@ -64,8 +64,8 @@ void	ft_ls_recursion(t_ls *ls, t_dir_info *dir)
 		write(1, "\n", 1);
 		dir = dir->next;
 		//
-		ft_printf("is going through dir");
+		ft_printf("//is going through dir");
 	}
 	//
-	ft_printf("made it into recursion\n");
+	ft_printf("//made it into recursion\n");
 }
