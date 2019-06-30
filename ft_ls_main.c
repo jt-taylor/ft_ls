@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:53:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/27 16:22:03 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/06/29 19:33:31 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	ft_ls_check_flags(t_ls *ls, char **argv, int ac)
 		if (i == ac - 1)
 			break ;
 	}
-	return (i + 1);
+	return (i);
 }
 
 /*
@@ -78,8 +78,10 @@ int		main(int ac, char **argv)
 	ft_bzero(ls->files, sizeof(t_dir_info));
 	if (ac > 1 && argv[1][0] == '-' && argv[1][1])
 		i = ft_ls_check_flags(ls, argv, ac);
-	if ((ac > 1 && i < ac && !ls->flag && ++i) || (ac > i && ls->flag))
+	ft_printf("value of i == %d\n", i);
+	if ((ac > 1 && i < ac && !ls->flag && ++i) || (ac > i + 1 && ls->flag))
 	{
+		ft_printf("is in the main's if body\ti == %d\n", i);
 		while (i < ac)
 			ft_ls_read_info(ls, argv[i++]);
 		ft_ls_sort_lists(ls, ls->files);
