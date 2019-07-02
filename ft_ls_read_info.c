@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 12:05:19 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/29 19:09:01 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/02 14:14:19 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static inline void		ft_ls_read_file_info(t_ls *ls, t_dir_info *dir,
 }
 
 /*
-** this will be the overhead for reading the info for a firectory
+** this is the handle for directory entries , either implicit or from a given path
 */
 void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 {
@@ -105,36 +105,51 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 	while ((ls->file = readdir(ls->fd_dir)))
 	{
 		// this is causing problems but it it shoudn't be ???
+		// -a is making it read more of the files bu still doesn'y read all of them
 		if (!(ls->flag & FLAG_LO_A) && (ls->file->d_name[0] == '.'))
+			//
+		{
+			ft_printf("// ft_ls_read_dir continue trigger d_name=%s\n", ls->file->d_name);
 			continue ;
+		}
 		file = new_file_elem(dir);
 		file->name_file = ft_strdup(ls->file->d_name);
+		//
+		ft_printf("value that was strdup'd == %s\n", file->name_file);
 		file->pwd = ft_join_dir(dir_name, file->name_file);
 		if (ls->flag & FLAG_LO_L || ls->flag & FLAG_LO_T ||
 				ls->flag & FLAG_UP_R)
 			ft_ls_read_file_info(ls, dir, file);
 		dir->total += ls->stat.st_blocks;
 		ft_bzero(&ls->stat, sizeof(ls->stat));
+		//
+		testing_int++;
 	}
 	closedir(ls->fd_dir);
 	//
-	ft_printf("//dir_name = %s\n", dir_name);
+	ft_printf("//dir_name = %s\n\n\n", dir_name);
 }
 
 /*
-** this is the overhead for reading the info for a given filename
-** makea  new instance t_file_info
-** reuses the same ls->stat (lstat(argv, &ls->stat)) for each time it is called 
+** this is the handle for given files (ie ./ft_ls path_to_file_name)
+** as apposed to grabbing it implicitly (ie ./ft_ls)
 */
 
 void	ft_ls_read_info(t_ls *ls, char *argv)
 {
+	//
+	ft_printf("//read_info\n");
 	t_file_info	*file;
 
 	file = new_file_elem(ls->files);
 	file->name_file = ft_strdup(argv);
 	if (lstat(argv, &ls->stat) < 0)
+		//
+	{
+		//
+		ft_printf("lstat file errror\n");
 		file->failure = 1;
+	}
 	else
 		ft_ls_read_file_info(ls, ls->files, file);
 	ft_bzero(&ls->stat,sizeof(ls->stat));

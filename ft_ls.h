@@ -6,12 +6,25 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:34:41 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 22:27:10 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/01 14:35:05 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
+
+
+
+
+
+/*
+** current main isssues
+** isn't reading all the files in a given directiory
+** using -a makes it read more of the files but it still doesnt read all of them
+** using flags and a dir name is broken right now
+** when given flags and a directory it prints the diorectory instead of just what is in the dir
+** misses the '.' and '..' directorys
+*/
 
 # include <dirent.h>
 # include <sys/stat.h>
@@ -39,6 +52,12 @@
 # define FLAG_LO_R 0x04
 # define FLAG_UP_R 0x08
 # define FLAG_LO_T 0x10
+
+/*
+** for testing remember to remove late
+*/
+//
+int testing_int;
 
 /*
 ** most of the examples that I looked at are using 3 structs
