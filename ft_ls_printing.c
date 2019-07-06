@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:42:58 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/29 11:56:36 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/05 14:57:50 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,21 @@ void		ft_ls_print_simple(t_dir_info *dir, char flag)
 	t_file_info *tmp;
 
 	tmp = (flag & FLAG_LO_R) ? dir->last_file : dir->head;
+	//
+	ft_printf("value of flag == %b\n", flag);
 	while (tmp)
 	{
 		if (!tmp->failure)
 			ft_printf("%s\n", tmp->name_file);
 		tmp = (flag & FLAG_LO_R) ? tmp->prev : tmp->next;
+		//
+//		ft_printf("is looping here %i\t", testing_int++);
+//		ft_printf("name of prev dir == %s\t", tmp->prev->name_file);
+//		ft_printf("\tname of 2pre dir == %s\t", tmp->prev->prev->name_file);
+//		sleep(1);
 	}
+	//
+	ft_printf("is outside this loop\n");
 }
 
 static int	ft_ls_print_error_files(t_ls *ls, t_file_info *file)
@@ -118,6 +127,8 @@ void		print_output_handle(t_ls *ls, t_dir_info *dir, t_dir_info **point)
 void		ft_ls_printing(t_ls *ls)
 {
 	int		files;
+	//
+	files = 0;
 	if (ls->files->head)
 		files = (ls->files->head) ? ft_ls_print_error_files(ls, ls->files->head) : 0;
 	(ls->files->head && files && ls->dirs) ? write(1, "\n", 1) : 0;
@@ -128,6 +139,7 @@ void		ft_ls_printing(t_ls *ls)
 	else
 		print_output_handle(ls, ls->dirs, &ls->dirs->next);
 	//made it here
+	ft_printf("//value of error int == %d\n", files);
 	ft_printf("//made end of printing\n");
 	ft_printf("//%08b is flag value\n", ls->flag);
 }

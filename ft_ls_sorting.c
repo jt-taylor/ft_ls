@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 14:52:31 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 20:49:44 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/03 16:16:11 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 	{
 		j = -1;
 		file = dir->head;
+		//
 		while (file->next && ++j < len)
 		{
 			if ((file->mtime < file->next->mtime) ||
@@ -68,11 +69,15 @@ static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 				(&dir->head->size == &file->size) ? dir->head = file->next : 0;
 				(&dir->last_file->size == &file->next->size) ?
 					dir->last_file = file : 0;
+				//
+				ft_printf("swapped %s && %s\n", file->name_file, file->next->name_file);
 				swap_elem(file, file->next);
 			}
 			(file->next) ? file = file->next : 0;
 		}
 	}
+	//
+	ft_printf("\n");
 }
 
 static inline void		sort_by_name(t_dir_info *dir, t_file_info *file)
@@ -83,7 +88,7 @@ static inline void		sort_by_name(t_dir_info *dir, t_file_info *file)
 
 	i = -1;
 	len = ft_list_elem_total(dir->head) - 1;
-	while (i++ < len)
+	while (++i < len)
 	{
 		j = -1;
 		file = dir->head;
