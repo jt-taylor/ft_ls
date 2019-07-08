@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 14:52:31 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/08 13:12:36 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:33:58 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@ static inline int	ft_list_elem_total(t_file_info *list)
 /*
 ** swap the position of two elemnts in the list
 */
+/*
+** static inline void	swap_elem(t_file_info *a, t_file_info *b)
+** {
+** 	(a->prev) ? a->prev->next = b : 0;
+** 	(b->next) ? b->next->prev = a : 0;
+** 	b->prev = a->next;
+** 	a->next = b->next;
+** 	b->next = a;
+** 	a->prev = b;
+}
+*/
 static inline void	swap_elem(t_file_info *a, t_file_info *b)
 {
 	(a->prev) ? a->prev->next = b : 0;
 	(b->next) ? b->next->prev = a : 0;
-	b->prev = a->next;
+	b->prev = a->prev;
 	a->next = b->next;
 	b->next = a;
 	a->prev = b;
@@ -109,8 +120,7 @@ static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 					dir->last_file = file : 0;
 				swap_elem(file, file->next);
 			}
-			if (file->next)
-				file = file->next;
+			(file->next) ? file = file->next : 0;
 		}
 	}
 	//
