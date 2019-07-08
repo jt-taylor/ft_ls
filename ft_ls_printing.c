@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 16:42:58 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/05 14:57:50 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:04:08 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void		ft_ls_print_simple(t_dir_info *dir, char flag)
 //		sleep(1);
 	}
 	//
-	ft_printf("is outside this loop\n");
+	//ft_printf("is outside this loop\n");
 }
 
 static int	ft_ls_print_error_files(t_ls *ls, t_file_info *file)

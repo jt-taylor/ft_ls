@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:34:41 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/01 14:35:05 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 12:45:19 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,5 +151,10 @@ void		ft_ls_printing(t_ls *ls);
 void		print_output_handle(t_ls *ls, t_dir_info *dir, t_dir_info **point);
 void		ft_ls_print_long(t_file_info *file, t_ls *ls, t_dir_info *dir);
 void		ft_ls_print_simple(t_dir_info *dir, char flag);
+
+/*
+** testing
+*/
+void		print_dir_info(t_dir_info *t);
 
 #endif

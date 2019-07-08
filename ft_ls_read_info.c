@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 12:05:19 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/05 16:02:23 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:12:04 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,13 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 		if (!(ls->flag & FLAG_LO_A) && (ls->file->d_name[0] == '.'))
 			//
 		{
-			ft_printf("// ft_ls_read_dir continue trigger d_name=%s\n", ls->file->d_name);
+			//ft_printf("// ft_ls_read_dir continue trigger d_name=%s\n", ls->file->d_name);
 			continue ;
 		}
 		file = new_file_elem(dir);
 		file->name_file = ft_strdup(ls->file->d_name);
 		//
-		ft_printf("value that was strdup'd == %s\n", file->name_file);
+		//ft_printf("value that was strdup'd == %s\n", file->name_file);
 		file->pwd = ft_join_dir(dir_name, file->name_file);
 		if (ls->flag & FLAG_LO_L || ls->flag & FLAG_LO_T ||
 				ls->flag & FLAG_UP_R)
@@ -123,11 +123,15 @@ void	ft_ls_read_dir_info(t_ls *ls, const char *dir_name)
 		dir->total += ls->stat.st_blocks;
 		ft_bzero(&ls->stat, sizeof(ls->stat));
 		//
-		testing_int++;
+		//testing_int++;
 	}
 	closedir(ls->fd_dir);
 	//
-	ft_printf("//dir_name = %s\n\n\n", dir_name);
+	print_dir_info(dir);
+	//
+	ft_printf("// is in read_dir_info\n");
+	ft_ls_print_simple(dir, ls->flag);
+	ft_printf("\n\n");
 }
 
 /*
