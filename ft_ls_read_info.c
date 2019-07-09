@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/23 12:05:19 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/08 21:38:46 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/09 14:03:10 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,19 @@ static inline void		check_time(t_file_info *file)
 ** this will handle the reading of links and append it to the file name
 */
 
+/*
+** okay so right now this is leaking because ft_strjoin calls strnew which
+** allocates the needed memeory for a string of a given length then it fills
+** in the string with str1 and then str2 ,
+** this is only a problem because when ->name_file becomes the upated
+** ->name_file the old memory is still allocated for it
+**
+** how to fix -- make a temporary variable so we can actually free the old
+** string
+*/
+
+
+/*
 static inline void		find_link(t_file_info *file)
 {
 	char	*buffer;
@@ -54,6 +67,22 @@ static inline void		find_link(t_file_info *file)
 	file->name_file = ft_strjoin(file->name_file, " -> ");
 	file->name_file = ft_strjoin(file->name_file, buffer);
 	free(buffer);
+}
+*/
+static inline void		find_link(t_file_info *file)
+{
+	char	*buffer;
+	ssize_t	size;
+
+	buffer = malloc(PATH_MAX);
+	ft_bzero(buffer, PATH_MAX);
+	if (file->pwd)
+		size = readlink(file->pwd, buffer, PATH_MAX);
+	else
+		size = readlink(file->name_file, buffer, PATH_MAX);
+	buffer[size] = '\0';
+	file->name_file = ft_strjoin_free(file->name_file, " -> ", 1);
+	file->name_file = ft_strjoin_free(file->name_file, buffer, 3);
 }
 
 /*
