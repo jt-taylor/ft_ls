@@ -6,14 +6,11 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/21 14:53:55 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/08 13:09:11 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 21:34:49 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-//
- int testing_int = 0;
 
 static inline void	ft_usage(char c)
 {
@@ -22,13 +19,30 @@ static inline void	ft_usage(char c)
 	exit(1);
 }
 
+static inline int	ft_ls_check_flags_inner(t_ls *ls, char c)
+{
+	if (c == 'l')
+		ls->flag |= FLAG_LO_L;
+	else if (c == 'a')
+		ls->flag |= FLAG_LO_A;
+	else if (c == 'R')
+		ls->flag |= FLAG_UP_R;
+	else if (c == 'r')
+		ls->flag |= FLAG_LO_R;
+	else if (c == 't')
+		ls->flag |= FLAG_LO_T;
+	else
+		return (0);
+	return (1);
+}
+
 /*
 ** for each arg starting with '-'
 ** check the flags //
 ** stored in a unsigned char
 */
 
-static int	ft_ls_check_flags(t_ls *ls, char **argv, int ac)
+static int			ft_ls_check_flags(t_ls *ls, char **argv, int ac)
 {
 	int	i;
 	int	j;
@@ -40,16 +54,8 @@ static int	ft_ls_check_flags(t_ls *ls, char **argv, int ac)
 		j = 1;
 		while (argv[i][j])
 		{
-			if (argv[i][j] == 'l')
-				ls->flag |= FLAG_LO_L;
-			else if (argv[i][j] == 'a')
-				ls->flag |= FLAG_LO_A;
-			else if (argv[i][j] == 'R')
-				ls->flag |= FLAG_UP_R;
-			else if (argv[i][j] == 'r')
-				ls->flag |= FLAG_LO_R;
-			else if (argv[i][j] == 't')
-				ls->flag |= FLAG_LO_T;
+			if (ft_ls_check_flags_inner(ls, argv[i][j]))
+				;
 			else
 				ft_usage(argv[i][j]);
 			j++;
@@ -69,7 +75,7 @@ static int	ft_ls_check_flags(t_ls *ls, char **argv, int ac)
 ** printing everything
 */
 
-int		main(int ac, char **argv)
+int					main(int ac, char **argv)
 {
 	t_ls	*ls;
 	int		i;
@@ -81,14 +87,10 @@ int		main(int ac, char **argv)
 	ft_bzero(ls->files, sizeof(t_dir_info));
 	if (ac > 1 && argv[1][0] == '-' && argv[1][1])
 		i = ft_ls_check_flags(ls, argv, ac);
-	//
-	ft_printf("//value of i == %d\n", i);
 	if (argv[i][0] == '-')
 		i++;
 	if ((ac > 1 && i < ac && !ls->flag && ++i) || (ac > i && ls->flag))
 	{
-		//
-		ft_printf("//is in the main's if body\ti == %d\n//argv[%d] == %s\n", i, i, argv[i]);
 		while (i < ac)
 			ft_ls_read_info(ls, argv[i++]);
 		ft_ls_sort_lists(ls, ls->files);
@@ -97,7 +99,5 @@ int		main(int ac, char **argv)
 	else
 		ft_ls_read_dir_info(ls, ".");
 	ft_ls_printing(ls);
-	//
-	ft_printf("//testing_int = %d\n", testing_int);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 14:52:31 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/07/08 13:33:58 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 21:42:26 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /*
 ** get the number of elemts in the t_file_info linked list
 */
-static inline int	ft_list_elem_total(t_file_info *list)
+
+static inline int		ft_list_elem_total(t_file_info *list)
 {
 	int		i;
 
@@ -31,18 +32,8 @@ static inline int	ft_list_elem_total(t_file_info *list)
 /*
 ** swap the position of two elemnts in the list
 */
-/*
-** static inline void	swap_elem(t_file_info *a, t_file_info *b)
-** {
-** 	(a->prev) ? a->prev->next = b : 0;
-** 	(b->next) ? b->next->prev = a : 0;
-** 	b->prev = a->next;
-** 	a->next = b->next;
-** 	b->next = a;
-** 	a->prev = b;
-}
-*/
-static inline void	swap_elem(t_file_info *a, t_file_info *b)
+
+static inline void		swap_elem(t_file_info *a, t_file_info *b)
 {
 	(a->prev) ? a->prev->next = b : 0;
 	(b->next) ? b->next->prev = a : 0;
@@ -59,44 +50,6 @@ static inline void	swap_elem(t_file_info *a, t_file_info *b)
 ** merge sort would be much better and is often the prefference for linked list
 */
 
-/*
-** so I know for that the sorting functions are part of the problem because -t
-** is missing different things than sort by name is
-*/
-/*
-** static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
-** {
-** 	int		i;
-** 	int		j;
-** 	int		len;
-** 
-** 	i = -1;
-** 	len = ft_list_elem_total(dir->head) - 1;
-** 	while (++i < len)
-** 	{
-** 		j = -1;
-** 		file = dir->head;
-** 		//
-** 		while (file->next && ++j < len)
-** 		{
-** 			if ((file->mtime < file->next->mtime) ||
-** 				((file->mtime == file->next->mtime) &&
-** 				 (ft_strcmp(file->name_file, file->next->name_file) > 0)))
-** 			{
-** 				(&dir->head->size == &file->size) ? dir->head = file->next : 0;
-** 				(&dir->last_file->size == &file->next->size) ?
-** 					dir->last_file = file : 0;
-** 				//
-** 				ft_printf("swapped %s && %s\n", file->name_file, file->next->name_file);
-** 				swap_elem(file, file->next);
-** 			}
-** 			(file->next) ? file = file->next : 0;
-** 		}
-** 	}
-** 	//
-** 	ft_printf("\n");
-** }
-*/
 static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 {
 	int	i;
@@ -113,7 +66,7 @@ static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 		{
 			if ((file->mtime < file->next->mtime) ||
 					((file->mtime == file->next->mtime) &&
-					 (ft_strcmp(file->name_file, file->next->name_file) > 0)))
+					(ft_strcmp(file->name_file, file->next->name_file) > 0)))
 			{
 				(&dir->head->size == &file->size) ? dir->head = file->next : 0;
 				(&dir->last_file->size == &file->next->size) ?
@@ -123,10 +76,6 @@ static inline void		sort_by_time(t_dir_info *dir, t_file_info *file)
 			(file->next) ? file = file->next : 0;
 		}
 	}
-	//
-	ft_printf("//In sort by time\n");
-	ft_ls_print_simple(dir, 0);
-	ft_printf("\n\n");
 }
 
 static inline void		sort_by_name(t_dir_info *dir, t_file_info *file)
@@ -153,13 +102,9 @@ static inline void		sort_by_name(t_dir_info *dir, t_file_info *file)
 			(file->next) ? file = file->next : 0;
 		}
 	}
-	//
-	ft_printf("//In sort by name\n");
-	ft_ls_print_simple(dir, 0);
-	ft_printf("\n\n");
 }
 
-void		ft_ls_sort_lists(t_ls *ls, t_dir_info *dir)
+void					ft_ls_sort_lists(t_ls *ls, t_dir_info *dir)
 {
 	if (ls->flag & FLAG_LO_T)
 		sort_by_time(dir, dir->head);

@@ -6,7 +6,7 @@
 #    By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/06 11:33:14 by jtaylor           #+#    #+#              #
-#    Updated: 2019/02/11 22:33:47 by jtaylor          ###   ########.fr        #
+#    Updated: 2019/07/08 20:53:42 by jtaylor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,10 +49,10 @@ $(NAME): $(OBJ)
 	@gcc $(CFLAGS) -c $< -o $@ -I ./includes/
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 

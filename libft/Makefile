@@ -6,7 +6,7 @@
 #    By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/21 17:04:25 by jtaylor           #+#    #+#              #
-#    Updated: 2019/03/19 23:43:49 by jtaylor          ###   ########.fr        #
+#    Updated: 2019/07/08 20:53:37 by jtaylor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,18 +86,19 @@ LIBHEADER = libft.h
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar -rcs $(NAME) $(OBJ)
+	@ar -rcs $(NAME) $(OBJ)
+	@echo "\tBuilding libft.a && libftprintf.a\n"
 
 $(OBJ): $(SRC)
-	gcc $(FLAGS) $(SRC)
-	make -C ./ft_printf
+	@gcc $(FLAGS) $(SRC)
+	@make -C ./ft_printf
 
 clean:
-	rm -f $(OBJ)
-	make clean -C ./ft_printf
+	@rm -f $(OBJ)
+	@make clean -C ./ft_printf
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C ./ft_printf
+	@rm -f $(NAME)
+	@make fclean -C ./ft_printf
 
 re: fclean all

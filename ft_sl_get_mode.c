@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 12:10:23 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/26 12:44:27 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 21:27:39 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 ** gets the mode charector
 ** ie the leading 'd' etc.
 */
+
 static inline void		check_type(const unsigned int *mode, char *str)
 {
 	if (S_ISDIR(*mode))
@@ -66,7 +67,7 @@ static inline void		check_type(const unsigned int *mode, char *str)
 **	people in the group can delete a file in that directory
 */
 
-void		check_mode(unsigned int mode, char *str)
+void					check_mode(unsigned int mode, char *str)
 {
 	check_type((const unsigned int *)&mode, str);
 	str[1] = (char)((mode & S_IRUSR) ? 'r' : '-');

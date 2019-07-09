@@ -6,7 +6,7 @@
 /*   By: jtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 16:36:12 by jtaylor           #+#    #+#             */
-/*   Updated: 2019/06/29 19:32:21 by jtaylor          ###   ########.fr       */
+/*   Updated: 2019/07/08 21:20:18 by jtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static inline void	dir_info(t_ls *ls, t_dir_info *dirt)
 	}
 }
 
-void	ft_ls_recursion(t_ls *ls, t_dir_info *dir)
+void				ft_ls_recursion(t_ls *ls, t_dir_info *dir)
 {
 	t_dir_info	*tmp;
 
@@ -63,9 +63,5 @@ void	ft_ls_recursion(t_ls *ls, t_dir_info *dir)
 			break ;
 		write(1, "\n", 1);
 		dir = dir->next;
-		//
-		ft_printf("//is going through dir");
 	}
-	//
-	ft_printf("//made it into recursion\n");
 }
